@@ -1,23 +1,25 @@
 <!doctype html>
-<html lang="">
+<html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>@ViewData["Title"] - Componentpalooza</title>
 
         <environment names="Development">
+            <link rel="stylesheet" href="~/css/a_theme.css">
         </environment>
         <environment names="Staging,Production">
+            <link rel="stylesheet" asp-file-version="true">
         </environment>
     </head>
     <body>
       @RenderBody()
 
         <environment names="Development">
-            <script src="~/js/site.js"></script>
+            <script src="~/js/app.js"></script>
         </environment>
         <environment names="Staging,Production">
-            <script src="~/js/site.js" asp-file-version="true"></script>
+            <script src="~/js/site.min.js" asp-file-version="true"></script>
         </environment>
 
         @RenderSection("scripts", required: false)
