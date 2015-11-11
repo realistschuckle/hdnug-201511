@@ -1,0 +1,3 @@
+#!/bin/bash
+
+psql -d hdnug -U hdnug -a -f Models/migration.sql

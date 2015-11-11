@@ -6,7 +6,7 @@ namespace Componentpalooza.Models
     {
         public long Id { get; set; }
         
-        public DateTime Start { get; set; }
+        public DateTime StartsAt { get; set; }
         
         public string Title { get; set; }
         
