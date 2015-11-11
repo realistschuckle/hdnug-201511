@@ -1,0 +1,3 @@
+#!/bin/bash
+
+nodemon --ext "cs,json" --exec "dnx web"
