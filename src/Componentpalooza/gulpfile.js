@@ -24,11 +24,11 @@ paths.concatJsDest = paths.webroot + 'js/site.min.js';
 paths.concatCssDest = paths.webroot + 'css/site.min.css';
 
 gulp.task('clean:js', function() {
-  return del(paths.concatJsDest);
+  return del(path.join(paths.webroot, 'js'));
 });
 
 gulp.task('clean:css', function() {
-  return del(paths.concatCssDest);
+  return del(path.join(paths.webroot, 'css'));
 });
 
 gulp.task('compile:js', function () {
@@ -40,7 +40,7 @@ gulp.task('compile:js', function () {
 });
 
 gulp.task('compile:css', function () {
-  return gulp.src(paths.csssrc)
+  return gulp.src([paths.csssrc, path.join(paths.webroot, 'lib/pure/pure.css')])
     .pipe(sass())
     .pipe(gulp.dest(path.join(paths.webroot, 'css')));
 })
