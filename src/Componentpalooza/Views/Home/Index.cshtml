@@ -1,0 +1,25 @@
+@using System.Collections.Generic
+@using Componentpalooza.Models
+@model IEnumerable<Appointment>
+
+<table class="pure-table">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Starts</th>
+			<th>Title</th>
+			<th>Length</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var appt in Model)
+		{
+			<tr>
+				<td>@appt.Id</td>
+				<td>@appt.Start</td>
+				<td>@appt.Title</td>
+				<td>@appt.FifteenMinuteMultiplier</td>
+			</tr>
+		}
+	</tbody>
+</table>

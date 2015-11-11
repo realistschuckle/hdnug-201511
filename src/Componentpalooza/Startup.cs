@@ -24,6 +24,13 @@ namespace Componentpalooza
         // This method gets called by the runtime.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Enable the options service
+            services.AddOptions();
+            services.Configure<AppOptions>(options =>
+            {
+                options.ConnectionString = Configuration.Get<string>("appOptions:connectionString");
+            });
+            
             // Add MVC services to the services container.
             services.AddMvc();
 
