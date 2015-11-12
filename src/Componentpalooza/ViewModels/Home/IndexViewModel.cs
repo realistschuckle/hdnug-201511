@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Componentpalooza.Models;
+using Microsoft.AspNet.Mvc.Rendering;
 
 namespace Componentpalooza.ViewModels.Home
 {
@@ -10,8 +11,26 @@ namespace Componentpalooza.ViewModels.Home
         public IndexViewModel(IEnumerable<Appointment> appointments)
         {
             _appointments = appointments;
+            FifteenMinuteMultiplier = 4;
+            var multipliers = new List<SelectListItem>();
+            for (var i = 1; i < 9; i += 1)
+            {
+                multipliers.Add(new SelectListItem {
+                    Text = FormatLength(i),
+                    Value = i.ToString() 
+                });
+            }
+            Multipliers = multipliers;
         }
-
+		
+        public DateTime? StartsAt { get; private set; }
+        
+        public string Title { get; private set; }
+        
+        public short FifteenMinuteMultiplier { get; private set; }
+        
+        public IEnumerable<SelectListItem> Multipliers { get; private set; }
+        
         public IEnumerable<IGrouping<DateTime, Appointment>> Past
         {
             get

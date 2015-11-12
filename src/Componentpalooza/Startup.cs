@@ -68,7 +68,6 @@ namespace Componentpalooza
             
             app.Use((context, next) =>
             {
-                System.Console.WriteLine("Method: {0}", context.Request.Method);
                 if (context.Request.Method.ToLower() == "get") {
                     return next();
                 }
