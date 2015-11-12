@@ -71,6 +71,11 @@ gulp.task('watch', ['min'], function () {
   gulp.watch(paths.csssrc, ['min:css']);
 });
 
+gulp.task('watch:dev', ['compile'], function () {
+  gulp.watch(paths.jssrc, ['compile:js']);
+  gulp.watch(paths.csssrc, ['compile:css']);
+});
+
 gulp.task('clean', ['clean:js', 'clean:css']);
 gulp.task('compile', ['compile:js', 'compile:css']);
 gulp.task('min', ['min:js', 'min:css']);
