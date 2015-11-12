@@ -44,7 +44,7 @@ gulp.task('compile:css', function () {
   return gulp.src([path.join(paths.webroot, 'lib/pure/pure.css'), paths.csssrc])
     .pipe(sass())
     .pipe(gulp.dest(path.join(paths.webroot, 'css')));
-})
+});
 
 gulp.task('min:js', ['compile:js'], function() {
   gulp.src([paths.js, '!' + paths.minJs], {
