@@ -6,16 +6,23 @@
 		{
 		<section class="appointment-day past-day">
 			<header class="appointment-date">@Model.FormatDate(group.Key)</header>
+			@foreach(var appt in group)
+			{
 			<div class="appointment-times">
-				@foreach(var appt in group)
-				{
 				<date class="appointment-time">
 					<span class="appointment-start">@Model.FormatTime(appt.StartsAt)</span>
 					<span class="appointment-length">(@Model.FormatLength(appt.FifteenMinuteMultiplier))</span>
 				</date>
 				<div class="appointment-title">@appt.Title</div>
-				}
+				<div class="appointment-delete">
+					@using(Html.BeginForm("Delete", "Home", new {@appt.Id}, FormMethod.Post))
+					{
+						<input type="hidden" name="X-HTTP-Method-Override" value="DELETE">
+						<button class="undecorated-button">x</button>
+					}
+				</div>
 			</div>
+			}
 		</section>
 		}
 	</div>
@@ -25,16 +32,23 @@
 		{
 		<section class="appointment-day">
 			<header class="appointment-date">@Model.FormatDate(group.Key)</header>
+			@foreach(var appt in group)
+			{
 			<div class="appointment-times">
-				@foreach(var appt in group)
-				{
 				<date class="appointment-time">
 					<span class="appointment-start">@Model.FormatTime(appt.StartsAt)</span>
 					<span class="appointment-length">(@Model.FormatLength(appt.FifteenMinuteMultiplier))</span>
 				</date>
 				<div class="appointment-title">@appt.Title</div>
-				}
+				<div class="appointment-delete">
+					@using(Html.BeginForm("Delete", "Home", new {@appt.Id}, FormMethod.Post))
+					{
+						<input type="hidden" name="X-HTTP-Method-Override" value="DELETE">
+						<button class="undecorated-button">x</button>
+					}
+				</div>
 			</div>
+			}
 		</section>
 		}
 	</div>
@@ -55,7 +69,14 @@
 			<select id="length" name="appointment[FifteenMinuteMultiplier]">
 				@for(var i = 1; i < 9; i += 1)
 				{
-				<option value="@i">@Model.FormatLength(i)</option>
+					@if(i == 4)
+					{
+						<option value="@i" selected>@Model.FormatLength(i)</option>
+					}
+					else
+					{
+						<option value="@i">@Model.FormatLength(i)</option>
+					}
 				}
 			</select>
 

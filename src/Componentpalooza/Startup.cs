@@ -65,6 +65,20 @@ namespace Componentpalooza
 
             // Add static files to the request pipeline.
             app.UseStaticFiles();
+            
+            app.Use((context, next) =>
+            {
+                System.Console.WriteLine("Method: {0}", context.Request.Method);
+                if (context.Request.Method.ToLower() == "get") {
+                    return next();
+                }
+                var value = context.Request.Form["X-HTTP-Method-Override"];
+                if (!string.IsNullOrEmpty(value))
+                {
+                    context.Request.Method = value;
+                }
+                return next();
+            });
 
             // Add MVC to the request pipeline.
             app.UseMvc(routes =>

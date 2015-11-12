@@ -25,11 +25,33 @@ namespace Componentpalooza.Controllers
             }
         }
 
-				[HttpPost]
-				public ActionResult New()
-				{
-						return RedirectToAction("Index");
-				}
+        [HttpPost]
+        public async Task<ActionResult> New(Appointment appointment)
+        {
+            using(var conn = new NpgsqlConnection(_connectionString))
+            {
+                string template = @"
+                    INSERT INTO appointments(StartsAt, Title, FifteenMinuteMultiplier)
+                    VALUES (@StartsAt, @Title, @FifteenMinuteMultiplier)
+                ";
+                await conn.ExecuteAsync(template, new {appointment.StartsAt, appointment.Title, appointment.FifteenMinuteMultiplier});
+                return RedirectToAction("Index");
+            }
+        }
+        
+        [HttpDelete]
+        public async Task<ActionResult> Delete(long id)
+        {
+            using(var conn = new NpgsqlConnection(_connectionString))
+            {
+                string template = @"
+                    DELETE FROM appointments
+                    WHERE id = @id
+                ";
+                await conn.ExecuteAsync(template, new {id});
+                return RedirectToAction("Index");
+            }
+        }
 
         public IActionResult Error()
         {
