@@ -5,18 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Componentpalooza</title>
 
-		@if(Environment.GetEnvironmentVariable("APP_ENV") == "Development")
-		{
+		<environment names="Development">
 			<link rel="stylesheet" href="~/css/pure.css">
-			<link rel="stylesheet" href="~/css/a_base.css">
-			<link rel="stylesheet" href="~/css/b_layout.css">
-			<link rel="stylesheet" href="~/css/c_modules.css">
-			<link rel="stylesheet" href="~/css/d_theme.css">
-		}
-		else
-		{
-			<link rel="stylesheet" href="~/css/site.min.css" asp-file-version="true">
-		}
+			<link rel="stylesheet" asp-href-include="~/css/*.css" asp-href-exclude="~/css/pure.css">
+		</environment>
+		<environment names="Test,Production">
+			<link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true">
+		</environment>
   </head>
   <body>
 		<header id="main-header">
@@ -26,14 +21,12 @@
 			@RenderBody()
 		</main>
 
-		@if(Environment.GetEnvironmentVariable("APP_ENV") == "Development")
-		{
+		<environment names="Development">
 			<script src="~/js/app.js"></script>
-		}
-		else
-		{
-			<script src="~/js/site.min.js" asp-file-version="true"></script>
-		}
+		</environment>
+		<environment names="Test,Production">
+			<script src="~/js/site.min.js" asp-append-version="true"></script>
+		</environment>
 
     @RenderSection("scripts", required: false)
   </body>

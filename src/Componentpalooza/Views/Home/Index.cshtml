@@ -53,23 +53,22 @@
 		}
 	</div>
 
-	@using(Html.BeginForm("New", "Home", FormMethod.Post, new { @class="pure-form page-content-column pure-form-stacked", id="create-event-form-card" }))
-	{
-	<fieldset>
-		<legend>New Event</legend>
-
-		<div class="card-content">
-			@Html.LabelFor(m => m.StartsAt, "Starts at")
-			@Html.TextBoxFor(m => m.StartsAt)
-
-			@Html.LabelFor(m => m.Title)
-			@Html.TextBoxFor(m => m.Title)
-
-			@Html.LabelFor(m => m.FifteenMinuteMultiplier, "Length")
-			@Html.DropDownListFor(m => m.FifteenMinuteMultiplier, Model.Multipliers)
-
-			<button type="submit" class="pure-button pure-button-primary">Create appointment</button>
-		</div>
-	</fieldset>
-	}
+	<form asp-controller="Home" asp-action="New" class="pure-form page-content-column pure-form-stacked" id="create-event-form-card">
+		<fieldset>
+			<legend>New Event</legend>
+	
+			<div class="card-content">
+				<label asp-for="StartsAt">Starts at</label>
+				<input asp-for="StartsAt">
+	
+				<label asp-for="Title">Title</label>
+				<input asp-for="Title">
+				
+				<label asp-for="FifteenMinuteMultiplier">Length</label>
+				<select asp-for="FifteenMinuteMultiplier" asp-items="Model.Multipliers"></select>
+	
+				<button type="submit" class="pure-button pure-button-primary">Create appointment</button>
+			</div>
+		</fieldset>
+	</form>
 </div>
