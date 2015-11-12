@@ -7,15 +7,15 @@
 
 		@if(Environment.GetEnvironmentVariable("APP_ENV") == "Development")
 		{
-      <link rel="stylesheet" href="~/css/pure.css">
-      <link rel="stylesheet" href="~/css/a_base.css">
+			<link rel="stylesheet" href="~/css/pure.css">
+			<link rel="stylesheet" href="~/css/a_base.css">
 			<link rel="stylesheet" href="~/css/b_layout.css">
 			<link rel="stylesheet" href="~/css/c_modules.css">
 			<link rel="stylesheet" href="~/css/d_theme.css">
 		}
 		else
 		{
-      <link rel="stylesheet" href="~/css/site.min.css" asp-file-version="true">
+			<link rel="stylesheet" href="~/css/site.min.css" asp-file-version="true">
 		}
   </head>
   <body>
@@ -28,7 +28,7 @@
 
 		@if(Environment.GetEnvironmentVariable("APP_ENV") == "Development")
 		{
-      <script src="~/js/app.js"></script>
+			<script src="~/js/app.js"></script>
 		}
 		else
 		{

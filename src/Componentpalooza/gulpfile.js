@@ -41,7 +41,7 @@ gulp.task('compile:js', function () {
 });
 
 gulp.task('compile:css', function () {
-  return gulp.src([paths.csssrc, path.join(paths.webroot, 'lib/pure/pure.css')])
+  return gulp.src([path.join(paths.webroot, 'lib/pure/pure.css'), paths.csssrc])
     .pipe(sass())
     .pipe(gulp.dest(path.join(paths.webroot, 'css')));
 })
@@ -58,7 +58,7 @@ gulp.task('min:js', ['compile:js'], function() {
 });
 
 gulp.task('min:css', ['compile:css'], function() {
-  gulp.src([paths.css, '!' + paths.minCss])
+  gulp.src([paths.webroot + 'css/pure.css', paths.css, '!' + paths.minCss])
 		.pipe(maps.init())
     .pipe(concat(paths.concatCssDest))
     .pipe(cssmin())
