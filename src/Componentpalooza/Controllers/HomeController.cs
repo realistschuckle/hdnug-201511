@@ -25,6 +25,12 @@ namespace Componentpalooza.Controllers
             }
         }
 
+				[HttpPost]
+				public ActionResult New()
+				{
+						return RedirectToAction("Index");
+				}
+
         public IActionResult Error()
         {
             return View("~/Views/Shared/Error.cshtml");

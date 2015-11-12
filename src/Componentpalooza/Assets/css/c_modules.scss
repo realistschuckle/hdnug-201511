@@ -1,0 +1,52 @@
+.page-content {
+  flex: 1;
+  display: flex;
+}
+
+.page-content-column {
+  flex: 1;
+  margin: 0 .25em;
+  display: flex;
+  flex-direction: column;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.appointment-day {
+  display: flex;
+  flex-direction: column;
+}
+
+.appointment-list {
+  margin-bottom: 1em;
+  width: 100%;
+}
+
+.appointment-times {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.appointment-time {
+  flex: 0 0 25%;
+  margin-bottom: 1em;
+}
+
+.appointment-start {
+  display: block;
+}
+
+.appointment-length {
+  display: block;
+}
+
+.appointment-title {
+  flex: 0 0 75%;
+  margin-bottom: 1em;
+}

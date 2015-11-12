@@ -1,7 +1,10 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,700italic,400italic|Roboto:400,400italic,700,700italic);
+
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -12,4 +15,17 @@ body {
 main {
   flex: 1;
   display: flex;
+  margin: 0 .5em;
+}
+
+input {
+  width: 100%;
+}
+
+legend {
+  text-transform: uppercase;
+}
+
+header, h1, h2, h3, h4, h5, h6, legend {
+  font-family: 'Roboto Condensed', sans-serif;
 }

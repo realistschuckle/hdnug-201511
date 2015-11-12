@@ -1,45 +1,66 @@
 @model Componentpalooza.ViewModels.Home.IndexViewModel
 
-<table class="pure-table">
-	<thead>
-		<tr>
-			<th>Id</th>
-			<th>Starts</th>
-			<th>Title</th>
-			<th>Length</th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach(var appt in Model.Past)
+<div class="page-content">
+	<div class="page-content-column">
+		@foreach(var group in Model.Past)
 		{
-		<tr>
-			<td>@appt.Id</td>
-			<td>@appt.StartsAt</td>
-			<td>@appt.Title</td>
-			<td>@appt.FifteenMinuteMultiplier</td>
-		</tr>
+		<section class="appointment-day past-day">
+			<header class="appointment-date">@Model.FormatDate(group.Key)</header>
+			<div class="appointment-times">
+				@foreach(var appt in group)
+				{
+				<date class="appointment-time">
+					<span class="appointment-start">@Model.FormatTime(appt.StartsAt)</span>
+					<span class="appointment-length">(@Model.FormatLength(appt.FifteenMinuteMultiplier))</span>
+				</date>
+				<div class="appointment-title">@appt.Title</div>
+				}
+			</div>
+		</section>
 		}
-	</tbody>
-</table>
+	</div>
+	
+	<div class="page-content-column">
+		@foreach(var group in Model.Future)
+		{
+		<section class="appointment-day">
+			<header class="appointment-date">@Model.FormatDate(group.Key)</header>
+			<div class="appointment-times">
+				@foreach(var appt in group)
+				{
+				<date class="appointment-time">
+					<span class="appointment-start">@Model.FormatTime(appt.StartsAt)</span>
+					<span class="appointment-length">(@Model.FormatLength(appt.FifteenMinuteMultiplier))</span>
+				</date>
+				<div class="appointment-title">@appt.Title</div>
+				}
+			</div>
+		</section>
+		}
+	</div>
 
-<table class="pure-table">
-	<thead>
-		<tr>
-			<th>Id</th>
-			<th>Starts</th>
-			<th>Title</th>
-			<th>Length</th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach(var appt in Model.Future)
-		{
-		<tr>
-			<td>@appt.Id</td>
-			<td>@appt.StartsAt</td>
-			<td>@appt.Title</td>
-			<td>@appt.FifteenMinuteMultiplier</td>
-		</tr>
-		}
-	</tbody>
-</table>
+	@using(Html.BeginForm("New", "Home", FormMethod.Post, new { @class="pure-form page-content-column pure-form-stacked", id="create-event-form-card" }))
+	{
+	<fieldset>
+		<legend>New Event</legend>
+
+		<div class="card-content">
+			<label for="startsAt">Starts at</label>
+			<input type="datetime" name="appointment[StartsAt]" id="startsAt" required>
+
+			<label for="title" >Title</label>
+			<input type="text" name="appointment[Title]" id="title" required>
+
+			<label for="length">Length</label>
+			<select id="length" name="appointment[FifteenMinuteMultiplier]">
+				@for(var i = 1; i < 9; i += 1)
+				{
+				<option value="@i">@Model.FormatLength(i)</option>
+				}
+			</select>
+
+			<button type="submit" class="pure-button pure-button-primary">Create appointment</button>
+		</div>
+	</fieldset>
+	}
+</div>
