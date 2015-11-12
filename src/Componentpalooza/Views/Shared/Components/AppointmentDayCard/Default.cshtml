@@ -1,0 +1,12 @@
+@using System
+@using System.Linq
+@using Componentpalooza.ViewModels
+@model AppointmentDayCardViewModel
+
+<section class="appointment-day">
+	<header class="appointment-date">@Model.Time</header>
+	@foreach(var appt in Model)
+	{
+		@Component.Invoke("AppointmentCard", appt);
+	}
+</section>

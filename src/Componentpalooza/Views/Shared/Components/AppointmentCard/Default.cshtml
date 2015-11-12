@@ -1,0 +1,16 @@
+@model Componentpalooza.ViewModels.AppointmentCardViewModel
+
+<div class="appointment-times">
+	<date class="appointment-time">
+		<span class="appointment-start">@Model.StartsAt</span>
+		<span class="appointment-length">@Model.Length</span>
+	</date>
+	<div class="appointment-title">@Model.Title</div>
+	<div class="appointment-delete">
+		@using(Html.BeginForm("Delete", "Home", new {@Model.Id}, FormMethod.Post))
+		{
+			<input type="hidden" name="X-HTTP-Method-Override" value="DELETE">
+			<button class="undecorated-button">x</button>
+		}
+	</div>
+</div>

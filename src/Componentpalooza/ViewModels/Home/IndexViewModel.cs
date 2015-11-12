@@ -36,9 +36,8 @@ namespace Componentpalooza.ViewModels.Home
             get
             {
                 return _appointments
-                    .OrderByDescending(appt => appt.StartsAt.Date)
-                    .ThenBy(appt => appt.StartsAt.TimeOfDay)
                     .Where(appt => appt.StartsAt <= DateTime.Now)
+                    .OrderByDescending(appt => appt.StartsAt)
                     .GroupBy(appt => appt.StartsAt.Date, appt => appt);
             }
         }
@@ -48,8 +47,8 @@ namespace Componentpalooza.ViewModels.Home
             get
             {
                 return _appointments
-                    .OrderBy(appt => appt.StartsAt)
                     .Where(appt => appt.StartsAt > DateTime.Now)
+                    .OrderBy(appt => appt.StartsAt)
                     .GroupBy(appt => appt.StartsAt.Date, appt => appt);
             }
         }
