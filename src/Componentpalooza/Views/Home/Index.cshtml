@@ -1,6 +1,4 @@
-@using System.Collections.Generic
-@using Componentpalooza.Models
-@model IEnumerable<Appointment>
+@model Componentpalooza.ViewModels.Home.IndexViewModel
 
 <table class="pure-table">
 	<thead>
@@ -12,14 +10,36 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach(var appt in Model)
+		@foreach(var appt in Model.Past)
 		{
-			<tr>
-				<td>@appt.Id</td>
-				<td>@appt.StartsAt</td>
-				<td>@appt.Title</td>
-				<td>@appt.FifteenMinuteMultiplier</td>
-			</tr>
+		<tr>
+			<td>@appt.Id</td>
+			<td>@appt.StartsAt</td>
+			<td>@appt.Title</td>
+			<td>@appt.FifteenMinuteMultiplier</td>
+		</tr>
+		}
+	</tbody>
+</table>
+
+<table class="pure-table">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Starts</th>
+			<th>Title</th>
+			<th>Length</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var appt in Model.Future)
+		{
+		<tr>
+			<td>@appt.Id</td>
+			<td>@appt.StartsAt</td>
+			<td>@appt.Title</td>
+			<td>@appt.FifteenMinuteMultiplier</td>
+		</tr>
 		}
 	</tbody>
 </table>

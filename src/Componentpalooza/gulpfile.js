@@ -1,14 +1,15 @@
 /// <binding Clean='clean' />
 'use strict';
 var gulp = require('gulp'),
-  path = require('path'),
-  del = require('del'),
-  babel = require('gulp-babel'),
-  concat = require('gulp-concat'),
-  cssmin = require('gulp-cssmin'),
-  uglify = require('gulp-uglify'),
-  sass = require('gulp-sass'),
-  project = require('./project.json');
+		path = require('path'),
+		del = require('del'),
+		babel = require('gulp-babel'),
+		concat = require('gulp-concat'),
+		cssmin = require('gulp-cssmin'),
+		uglify = require('gulp-uglify'),
+		sass = require('gulp-sass'),
+		maps = require('gulp-sourcemaps'),
+    project = require('./project.json');
 
 var paths = {
   webroot: './' + project.webroot + '/'
@@ -49,19 +50,23 @@ gulp.task('min:js', ['compile:js'], function() {
   gulp.src([paths.js, '!' + paths.minJs], {
       base: '.'
     })
+		.pipe(maps.init())
     .pipe(concat(paths.concatJsDest))
     .pipe(uglify())
+		.pipe(maps.write())
     .pipe(gulp.dest('.'));
 });
 
 gulp.task('min:css', ['compile:css'], function() {
   gulp.src([paths.css, '!' + paths.minCss])
+		.pipe(maps.init())
     .pipe(concat(paths.concatCssDest))
     .pipe(cssmin())
+		.pipe(maps.write())
     .pipe(gulp.dest('.'));
 });
 
-gulp.task('watch', ['compile'], function () {
+gulp.task('watch', ['min'], function () {
   gulp.watch(paths.jssrc, ['min:js']);
   gulp.watch(paths.csssrc, ['min:css']);
 });

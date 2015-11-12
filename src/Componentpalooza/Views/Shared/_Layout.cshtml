@@ -1,28 +1,38 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@ViewData["Title"] - Componentpalooza</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Componentpalooza</title>
 
-        <environment names="Development">
-            <link rel="stylesheet" href="~/css/pure.css">
-            <link rel="stylesheet" href="~/css/a_theme.css">
-        </environment>
-        <environment names="Staging,Production">
-            <link rel="stylesheet" asp-file-version="true">
-        </environment>
-    </head>
-    <body>
-      @RenderBody()
+		@if(Environment.GetEnvironmentVariable("APP_ENV") == "Development")
+		{
+      <link rel="stylesheet" href="~/css/pure.css">
+      <link rel="stylesheet" href="~/css/a_base.css">
+			<link rel="stylesheet" href="~/css/b_layout.css">
+		}
+		else
+		{
+      <link rel="stylesheet" href="~/css/site.min.css" asp-file-version="true">
+		}
+  </head>
+  <body>
+		<header id="main-header">
+			<h1 class="title">Daily Organizer of Meetings</h1>
+		</header>
+		<main>
+			@RenderBody()
+		</main>
 
-        <environment names="Development">
-            <script src="~/js/app.js"></script>
-        </environment>
-        <environment names="Staging,Production">
-            <script src="~/js/site.min.js" asp-file-version="true"></script>
-        </environment>
+		@if(Environment.GetEnvironmentVariable("APP_ENV") == "Development")
+		{
+      <script src="~/js/app.js"></script>
+		}
+		else
+		{
+			<script src="~/js/site.min.js" asp-file-version="true"></script>
+		}
 
-        @RenderSection("scripts", required: false)
-    </body>
+    @RenderSection("scripts", required: false)
+  </body>
 </html>

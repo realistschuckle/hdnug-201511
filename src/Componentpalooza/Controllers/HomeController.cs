@@ -1,8 +1,10 @@
+using System.Threading.Tasks;
 using Dapper;
 using Npgsql;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Framework.OptionsModel;
 using Componentpalooza.Models;
+using Componentpalooza.ViewModels.Home;
 
 namespace Componentpalooza.Controllers
 {
@@ -13,13 +15,13 @@ namespace Componentpalooza.Controllers
             _connectionString = options.Value.ConnectionString;
         }
         
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             ViewData["Title"] = "Calendar!";
             using(var conn = new NpgsqlConnection(_connectionString))
             {
-                var appointments = conn.Query<Appointment>("SELECT * FROM appointments");
-                return View("Index", appointments);
+                var appointments = await conn.QueryAsync<Appointment>("SELECT * FROM appointments ORDER BY StartsAt");
+                return View("Index", new IndexViewModel(appointments));
             }
         }
 
